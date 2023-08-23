@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+contact
+{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <div class="d-flex">
+        <div class="row1 col-8">
+            <h3> Course Enquiry</h3>
+            Please fill this form to get best training institute for it course information
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"></label>
+                  <input type="text" class="form-control" placeholder="Name">
+                  <label for="exampleInputEmail1" class="form-label"></label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                  <label for="exampleInputEmail1" class="form-label"></label>
+                  <input type="number" class="form-control" placeholder="Mobile">
+                  <label for="exampleInputEmail1" class="form-label"></label>
+                  <input type="text" class="form-control" placeholder="Course">
+                  <label for="exampleInputText" class="form-label"></label>
+
+                  <select class="form-select" aria-label="Default select example">
+                    <!-- <input type="text" class="form-control" placeholder="Training Mode"> -->
+                    <option selected>Training Mode</option>
+                    <option value="1">Online</option>
+                    <option value="2">Offline</option>
+                  </select>
+                  
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+        <div class="row2 text-end col-4">
+            <h3>Registered office</h3>
+            <pre>APTRON NOIDA TRAINING CENTER
+            B-10, Sector 2,Near 15 Metro
+            Station,Noida,Uttar Pradesh
+                201301
+            </pre>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock content %}

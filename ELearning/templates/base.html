@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}
+          
+        {% endblock title %}
+
+
+    </title>
+    <style>
+      .active{
+        background-color: yellow;
+        padding-left: 2px;
+        padding-right: 2px;
+      }
+      body{
+        padding-top: 100px;
+      }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  
+  </head>
+  <body>
+    <div class="container-fluid">
+        <header class="p-3 text-bg-info fixed-top">
+            <div class="container">
+              <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-black text-decoration-none">
+                  <h2 class="me-5">E-Learning</h2>
+                </a>
+        <!-- start -->
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 nav nav-underline">
+              
+                  <li class="{% if request.path == '/' %} active
+                    
+                  {% endif %}"><a class="nav-link  text-black" href="{% url 'home' %}">Home</a></li>
+                  
+                  <li class="{% if request.path == '/contact/' %} active
+                    
+                  {% endif %}"><a class="nav-link text-black" href="{% url 'contact' %}">Contact</a></li>
+
+             <!--dropdown in course item start  -->
+                  <!-- <li><a href="#" class="nav-link px-2 text-black nav-item dropdown">Course</a></li> -->
+                  <!-- <li class="{% if request.path == '/course' %} active
+                    
+                  {% endif %}"> -->
+                  <a  href="" class="nav-link text-black dropdown-toggle" data-bs-toggle="dropdown" role="button">
+                    Course
+                  </a>
+                  <!-- </li> -->
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                  {% for i  in course_dtls %}  
+                    <li><a class="dropdown-item" href="course/{{i.course_name}}/">{{i.course_name}}</a></li>  
+                  {% endfor %}
+                    <!-- <li><a class="dropdown-item" href="#">Html</a></li>
+                    <li><a class="dropdown-item" href="#">Java Script</a></li>
+                    <li><a class="dropdown-item" href="#">CSS</a></li> -->
+                  </ul>
+              
+            <!-- dropdown in course item end -->
+
+                  <li class="{% if request.path == '/blog' %} active
+                    
+                  {% endif %}"><a href="{% url 'blog' %}" class="nav-link text-black nav-link">Blog</a></li>
+
+                  {% if request.session.name %}             
+                  <li class="{% if request.path == '/mycourse' %} active
+                    
+                  {% endif %}"><a href="{% url 'mycourse' %}" class="nav-link text-black">My Course</a></li>     
+                  <!-- <ul class="dropdown-menu dropdown-menu-dark"></ul> -->
+                  <!-- <li><a class="dropdown-item" href="#">{{course_dtls.course_name}}</a></li>         -->
+                  {% endif %}
+
+                  <li class="{% if request.path == '/about-us' %} active
+                    
+                  {% endif %}"><a href="#" class="nav-link text-black">About Us</a></li>
+                </ul>
+                
+                
+        
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-5 ps-1" role="search" style="width: 100px">
+                  <input type="search" class="form-control form-control-dark text-bg-light" placeholder="Search..." aria-label="Search">
+                </form>
+        
+                <div class="text-end">
+                  {% if request.session.name %}
+                  <a href="{% url 'logout' %}" class="btn btn-outline-light me-2 text-black">Logout</a>
+                  <a href="/" class="btn btn-warning">
+                  <h6 class="">{{request.session.name}}</h6>
+                </a>
+                  {% else %}
+                  <button type="button" class="btn btn-outline-light me-2 text-black" data-bs-toggle="modal" data-bs-target="#login">Login</button>
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#signup">
+                    Sign-up
+                  </button>
+                  {% endif %}
+         <!-- end -->
+                </div>
+              </div>
+            </div>
+          </header>
+
+      <!-- MARQUEE START -->
+    </div>
+    <div class="container-fluid" style="line-height: 10px;">
+      <marquee behavior="" direction="" width="100%"><h5>Getting started with Front end web development.Check out the details below.</h5></marquee>
+    </div>
+    <!-- MARQUEE END -->
+
+    {% block content %}{% endblock content %}
+    {% comment %}modal for sign-up{% endcomment %}
+    <div class="modal fade" id="signup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Sign Up</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="{% url 'signup' %}" method="post">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                      <label for="fname" class="form-label">First Name</label>
+                      <input type="text" class="form-control" id="fname" placeholder="enter your first name..." name="fname">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="lname" class="form-label">Last Name</label>
+                      <input type="text" class="form-control" id="lname" placeholder="enter your last name..." name="lname">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="enter your email..." name="email">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="enter your password..." name="password">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="number" class="form-label">Mobile</label>
+                        <input type="number" class="form-control" id="Mobile" placeholder="enter your mobile no..." name="mobile" maxlength="10">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="gender" class="form-label">Gender</label>
+                        <br>
+                        <input type="radio" class="form-check-input me-4" id="male" name="gender" value="male">Male
+                        <br>
+                        <input type="radio" class="form-check-input me-4" id="female" name="gender" value="female">Female
+                      </div>
+                      <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Sign in</button>
+                    </div>
+                  </form>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      {% comment %}modal for login{% endcomment %}
+    <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                      <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                      <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail3" name="email">
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                      <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword3" name="password">
+                      </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">login</button>
+                  </form>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+     
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+

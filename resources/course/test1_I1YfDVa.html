@@ -1,0 +1,90 @@
+<html>
+<head>
+	<title>registration form</title>
+	<style type="text/css">
+		.main{
+			font-size:29px;
+			background-color:aqua;
+			color:black;
+			height:30px;
+			
+			}
+		.main1{
+			height:60px;
+			}
+		.main2{
+			width:320px;
+			height:40px;
+			font-size:30px;
+			}
+		#main3{
+			width:320px;
+			height:100px;
+			font-size:30px;
+			}
+	</style>
+
+
+</head>
+<body>
+
+	<table width=100% border="20" class="main">
+	<form action="" method="post">
+		<tr>
+			<th>
+				<h1>Registration Form</h1>
+			</th>
+		</tr>
+		<tr>
+			<td class="main1">
+				First Name:<input type="text" name="fName" placeholder="enter your first name.."  required="" class="main2"/>
+			</td>
+		<tr/>
+		<tr>
+			<td class="main1">
+				Last Name:<input type="text"  name="lName" placeholder="enter your last name.."  required="" style="color:red" class="main2"/>
+			</td>
+		<tr/>
+		<tr>
+			<td class="main1">
+				Gender:<input type="Radio" value="m" name="Gender"/>Male
+					<input type="Radio" value"f" name="Gender"/>Female
+			</td>
+		<tr/>
+		<tr>
+			<td class="main1">
+				Hobbies:<input type="checkbox" value="m"/>Dancing
+					<input type="checkbox" value"f"/>Singing
+					<input type="checkbox" value"f"/>Painting
+					<input type="checkbox" value"f"/>Swimming
+			</td>
+		<tr/>
+		<tr>
+			<td class="main1">
+				Contact No:<input type="Number"  name="Number" required placeholder="enter your contact no.."  required="" class="main2"/>
+			</td>
+		<tr/>
+		<tr>
+			<td class="main1">
+				Address:<textarea name="address" placeholder="enter your address.."  required="" bg="red" id="main3"></textarea>
+			</td>
+		<tr/>
+		<tr>
+			<td class="main1">
+				DOB:<input type="date" class="main2"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="main1">
+				<input type="submit" value="save" class="main2"/>
+			</td>
+		<tr/>
+		
+       
+	</form>
+	</table>
+
+
+
+</body>
+</html>
